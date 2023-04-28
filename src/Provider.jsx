@@ -17,15 +17,25 @@ const ContextProvider = ({ children }) => {
     setPhotoArray(updatedArr);
   }
 
-  function addCartItems(newItem) {
+  function addCartItem(newItem) {
     setCartItems((prevItems) => [...prevItems, newItem]);
-    console.log(cartItems);
   }
 
-  function removeCartItems(id) {
+  function removeCartItem(id) {
     setCartItems((prevItems) => prevItems.filter((photo) => photo.id !== id));
   }
 
+  function emptyCartItems() {
+    setCartItems([]);
+  }
+
+  function totalCost(arr) {
+    const total = arr.length * 5.99;
+    return total.toLocaleString("it-IT", {
+      style: "currency",
+      currency: "Eur",
+    });
+  }
   useEffect(() => {
     fetch(
       "https://raw.githubusercontent.com/bobziroll/scrimba-react-bootcamp-images/master/images.json"
@@ -39,9 +49,11 @@ const ContextProvider = ({ children }) => {
       value={{
         photoArray,
         toggleFavorites,
-        addCartItems,
+        addCartItem,
         cartItems,
-        removeCartItems,
+        removeCartItem,
+        totalCost,
+        emptyCartItems,
       }}
     >
       {children}
