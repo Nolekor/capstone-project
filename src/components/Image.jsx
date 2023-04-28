@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 const Image = ({ className, img }) => {
   const [hovered, setHovered] = useState(false);
 
-  const { toggleFavorites, addCartItems, cartItems, removeCartItems } =
+  const { toggleFavorites, addCartItem, cartItems, removeCartItem } =
     useContext(Context);
 
   function handleMouseOver() {
@@ -40,7 +40,7 @@ const Image = ({ className, img }) => {
       return (
         <i
           className="ri-shopping-cart-fill cart"
-          onClick={() => removeCartItems(img.id)}
+          onClick={() => removeCartItem(img.id)}
         ></i>
       );
     } else if (hovered) {
@@ -48,7 +48,7 @@ const Image = ({ className, img }) => {
         <i
           className="ri-add-circle-line cart"
           onClick={() => {
-            addCartItems(img);
+            addCartItem(img);
           }}
         ></i>
       );
